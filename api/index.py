@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 from langchain.llms import OpenAI
 
-# from langchain.agents import create_csv_agent
+from langchain.agents import create_csv_agent
 
 load_dotenv()
 
@@ -23,9 +23,9 @@ def hello_world():
 @app.route("/api/test")
 def hello_test():
     print("OPENAI_API_KEY", OPENAI_API_KEY)
-    # agent = create_csv_agent(
-    #     OpenAI(openai_api_key=OPENAI_API_KEY), "titanic.csv", verbose=True
-    # )
-    # test = agent.run("how many rows are there?")
-    # return "<p>{test}</p>"
-    return "<p>Hello, World 222!</p>"
+    agent = create_csv_agent(
+        OpenAI(openai_api_key=OPENAI_API_KEY), "titanic.csv", verbose=True
+    )
+    test = agent.run("how many rows are there?")
+    return "<p>{test}</p>"
+    # return "<p>Hello, World 222!</p>"
