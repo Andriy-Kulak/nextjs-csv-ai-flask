@@ -5,7 +5,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
-OPENAI_API_KEY = "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"
+# OPENAI_API_KEY = "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"
 
 
 @app.route("/api/python")
