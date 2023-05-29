@@ -24,7 +24,7 @@ def hello_world():
 def hello_test():
     print("OPENAI_API_KEY", OPENAI_API_KEY)
     agent = create_csv_agent(
-        OpenAI(openai_api_key=OPENAI_API_KEY), "titanic.csv", verbose=True
+        OpenAI(openai_api_key=OPENAI_API_KEY), csvPath, verbose=True
     )
     test = agent.run("how many rows are there?")
     return "<p>{test}</p>"
