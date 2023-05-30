@@ -10,7 +10,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-csvPath = "https://nextjs-csv-ai-flask.vercel.app/weeklyGoals.csv"
+csvPath = "./files/weeklyGoals.csv"
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
@@ -22,10 +22,19 @@ def hello_world():
 
 @app.route("/api/test")
 def hello_test():
-    print("OPENAI_API_KEY", OPENAI_API_KEY)
+    print("OPENAI_API_KEY --------------------------------", OPENAI_API_KEY)
     agent = create_csv_agent(
-        OpenAI(openai_api_key=OPENAI_API_KEY), csvPath, verbose=True
+        OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY),
+        csvPath,
+        verbose=True,
     )
-    test = agent.run("how many rows are there?")
-    return "<p>{test}</p>"
-    # return "<p>Hello, World 222!</p>"
+    test = agent.run(
+        "This is my csv file with weekly goals. What is my completion rate for each goal?"
+    )
+    print("test --------------------------------", test)
+
+    return test
+
+
+if __name__ == "__main__":
+    app.run(port=5328)
